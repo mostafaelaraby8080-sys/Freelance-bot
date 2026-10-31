@@ -12,6 +12,7 @@ async def run() -> None:
     token, chat_id = get_config()
     init_db()
     async with Bot(token=token) as bot:
+        await bot.send_message(chat_id=chat_id, text="البوت اشتغل بنجاح من GitHub Actions! 🚀")
         await run_cycle(bot, chat_id)
 
 if __name__ == "__main__":
