@@ -57,4 +57,5 @@ def main():
     except Exception as e:
         print(f"فشلت كل المحاولات بسبب: {e}")
 if __name__ == "__main__":
+
     main()
