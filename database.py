@@ -49,3 +49,15 @@ def count_seen_jobs(platform: str | None = None, db_path: str = DB_PATH) -> int:
             query = "SELECT COUNT(*) FROM seen_jobs WHERE job_id LIKE ?"
             return conn.execute(query, (f"{platform}:%",)).fetchone()[0]
         return conn.execute("SELECT COUNT(*) FROM seen_jobs").fetchone()[0]
+
+import os
+
+def get_last_update_id():
+    if not os.path.exists("last_update.txt"):
+        return 0
+    with open("last_update.txt", "r") as f:
+        return int(f.read().strip())
+
+def save_last_update_id(update_id):
+    with open("last_update.txt", "w") as f:
+        f.write(str(update_id))
