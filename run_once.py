@@ -47,6 +47,7 @@ if name == "main":
     # لو عايز تشغل كود التليجرام خلي السطر ده
     asyncio.run(run())
     
+
     # ولو عايز تجرب كود جوجل، شيل علامة الـ # من السطور دي
     # try:
     #     result = call_gemini_api("اكتب لي جملة ترحيبية")
@@ -54,3 +55,29 @@ if name == "main":
     #     print(result)
     # except Exception as e:
     #     print(f"فشلت كل المحاولات بسبب: {e}")
+
+    print("جاري إرسال الطلب لجوجل...")
+    response = requests.post(url, headers=headers, json=data)
+    
+    # لو السيرفر رد بخطأ 503 أو غيره، هيرمي Exception عشان دالة الـ retry تشتغل
+    response.raise_for_status() 
+    
+    return response.json()
+
+
+def main():
+    try:
+        # استدعاء الدالة
+        result = call_gemini_api("اكتب لي جملة ترحيبية")
+        print("نجح الاتصال! النتيجة:")
+        print(result)
+        
+        # هنا ممكن تضيف كود إرسال الرسالة لتليجرام
+        # send_to_telegram(...)
+        
+    except Exception as e:
+        print(f"فشلت كل المحاولات بسبب: {e}")
+if __name__ == "__main__":
+
+    main()
+
