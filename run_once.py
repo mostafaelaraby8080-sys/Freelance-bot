@@ -14,5 +14,5 @@ async def run() -> None:
     async with Bot(token=token) as bot:
         await run_cycle(bot, chat_id)
 
-if name == "main":
+if __name__ == "__main__":
     asyncio.run(run())
